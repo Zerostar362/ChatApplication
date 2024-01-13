@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ChatApplication.ViewModels"
+             x:Class="ChatApplication.Views.ChatView"
+             Title="ChatView">
+    <ContentPage.BindingContext>
+        <vm:ChatViewModel/>
+    </ContentPage.BindingContext>
+    <VerticalStackLayout>
+        <Label 
+            Text="{Binding Test}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>

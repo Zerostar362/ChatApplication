@@ -1,4 +1,5 @@
-﻿using ChatApplication.ViewModels;
+﻿using ChatApplication.Code.Broker;
+using ChatApplication.ViewModels;
 using Microsoft.Extensions.Logging;
 
 namespace ChatApplication
@@ -15,7 +16,9 @@ namespace ChatApplication
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-            builder.Services.AddTransient<SettingsViewModel>();
+            builder.Services.AddSingleton<IBroker, SimpleBroker>();
+            builder.Services.AddSingleton<SettingsViewModel>();
+            builder.Services.AddTransient<ChatViewModel>();
 
 #if DEBUG
     		builder.Logging.AddDebug();
