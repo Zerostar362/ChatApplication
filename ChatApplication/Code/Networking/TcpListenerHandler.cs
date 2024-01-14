@@ -1,4 +1,5 @@
 ﻿using ChatApplication.Code.Broker;
+using ChatApplication.Code.Broker.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,7 +56,7 @@ namespace ChatApplication.Code.Networking
                 if (_listener.Pending())
                 {
                     var client = _listener.AcceptTcpClient();
-                    _broker.PublishMessage(this, client);
+                    _broker.PublishMessage<NewClientMessage>(this,new NewClientMessage(client));
                 }
                 Thread.Sleep(3000);
             }
