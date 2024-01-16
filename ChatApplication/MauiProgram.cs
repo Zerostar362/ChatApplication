@@ -1,4 +1,5 @@
 ﻿using ChatApplication.Code.Broker;
+using ChatApplication.Code.Certificate;
 using ChatApplication.ViewModels;
 using Microsoft.Extensions.Logging;
 
@@ -23,6 +24,8 @@ namespace ChatApplication
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+
+            CertificateGenerator.CheckOrGenerate();
 
             return builder.Build();
         }

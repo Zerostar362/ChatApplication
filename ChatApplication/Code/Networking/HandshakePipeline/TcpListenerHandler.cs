@@ -8,11 +8,12 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChatApplication.Code.Networking
+namespace ChatApplication.Code.Networking.HandshakePipeline
 {
     public class TcpListenerHandler
     {
-        private IBroker _broker;
+
+        private HandshakePipelineDelegate _next;
 
 
         private int _port;
@@ -22,9 +23,9 @@ namespace ChatApplication.Code.Networking
         private TcpListener _listener;
         private Task _listenerTask;
 
-        public TcpListenerHandler(IBroker broker) 
+        public TcpListenerHandler(HandshakePipelineDelegate next)
         {
-            _broker = broker;
+            _next = next;
         }
 
         public void Initialize(IPAddress address, int port)
@@ -51,12 +52,12 @@ namespace ChatApplication.Code.Networking
 
         private void ListenerLoop(CancellationToken token)
         {
-            while(!token.IsCancellationRequested)
+            while (!token.IsCancellationRequested)
             {
                 if (_listener.Pending())
                 {
                     var client = _listener.AcceptTcpClient();
-                    _broker.PublishMessage<NewClientMessage>(this,new NewClientMessage(client));
+                    _next?.Invoke(client);
                 }
                 Thread.Sleep(3000);
             }

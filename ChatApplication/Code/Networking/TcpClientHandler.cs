@@ -9,7 +9,12 @@ namespace ChatApplication.Code.Networking
 {
     public class TcpClientHandler
     {
-        public TcpClientHandler(TcpClient client) 
+        public TcpClientHandler() 
+        {
+            
+        }
+
+        public void EstablishClient(TcpClient client)
         {
             
         }

@@ -1,5 +1,6 @@
 ﻿using ChatApplication.Code.Broker;
 using ChatApplication.Code.Broker.Messages;
+using ChatApplication.Code.Networking.HandshakePipeline;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace ChatApplication.Code.Networking
     public class TcpHandler
     {
         private TcpListenerHandler _listener;
+        private TcpHandler _tcpHandler;
         private IBroker _broker;
 
         public TcpHandler(IBroker broker)

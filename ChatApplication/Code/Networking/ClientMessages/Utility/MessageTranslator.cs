@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChatApplication.Code.Networking.ClientMessages
+namespace ChatApplication.Code.Networking.ClientMessages.Utility
 {
     public static class MessageTranslator
     {
@@ -16,7 +16,7 @@ namespace ChatApplication.Code.Networking.ClientMessages
 
         public static byte[] ConvertToByte(this TcpClientMessage message)
         {
-
+            
         }
     }
 }
