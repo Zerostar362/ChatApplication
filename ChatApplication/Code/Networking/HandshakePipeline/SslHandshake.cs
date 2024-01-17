@@ -14,14 +14,9 @@ namespace ChatApplication.Code.Networking.HandshakePipeline
         private string certificatePath = "ChatApp.crt";
 
         private HandshakePipelineDelegate _next;
-        public SslHandshake(HandshakePipelineDelegate next) 
+        public SslHandshake(HandshakePipelineDelegate next)
         {
             _next = next;
-        }
-
-        private void LoadCertificate()
-        {
-            X509Store store = new X509Store(StoreName.My, StoreLocation.LocalMachine, OpenFlags.ReadOnly);
         }
 
         public void DoHandShake(TcpClient client)
