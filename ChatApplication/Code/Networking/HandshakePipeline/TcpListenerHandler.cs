@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Security;
 using System.Net.Sockets;
+using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,14 +76,16 @@ namespace ChatApplication.Code.Networking.HandshakePipeline
             _listenerTask.Wait();
         }
 
-        private void ListenerLoop(CancellationToken token)
+        private async void ListenerLoop(CancellationToken token)
         {
             while (!token.IsCancellationRequested)
             {
                 if (_listener.Pending())
                 {
                     var client = _listener.AcceptTcpClient();
-                    _next?.Invoke(client);
+                    var sslStream = new SslStream(client.GetStream(),false);
+                    await sslStream.AuthenticateAsServerAsync(_certificate, clientCertificateRequired: false, SslProtocols.Tls12, true); //Does an SSL Handshake
+                    _next?.Invoke(client, sslStream);
                 }
                 Thread.Sleep(3000);
             }

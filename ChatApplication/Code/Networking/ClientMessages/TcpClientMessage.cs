@@ -18,5 +18,18 @@ namespace ChatApplication.Code.Networking.ClientMessages
             Body = body;
             Signature = signature;
         }
+
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+
+            builder.Append(Head);
+            builder.Append(".");
+            builder.Append(Body);
+            builder.Append(".");
+            builder.Append(Signature);
+
+            return builder.ToString();
+        }
     }
 }

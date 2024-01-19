@@ -9,7 +9,7 @@ namespace ChatApplication.Code.Networking.ClientMessages.Utility.Encryption
     public static class KeyGenerator
     {
         const string chars = "QWERTYUIOPLKJHGFDSAZXCVBNMqwertyuioplkjhgfdsazxcvbnm123456789";
-        private static Random random = new Random();
+        private static Random random = new Random(); //Random is not a secure class
         public static string GenerateKey() => new string(Enumerable.Repeat(chars, 20).Select(s => s[random.Next(s.Length)]).ToArray());
     }
 }
